@@ -1,4 +1,23 @@
 #!/bin/bash
 
+#This script is created for 255.255.255.0 networks only.
+#config
+NETWORK=10.0.6.
+
+#script (dont do anything here, if you do not know what are you doing)
+HOST=1
+echo >> output.txt
+echo NEW SCAN >> output.txt
+while ((HOST < 255))
+do
+    echo trying $NETWORK$HOST
+    ping -c 1 $NETWORK$HOST
+    if [ $? -eq 0 ]; then
+        echo $NETWORK$HOST >> output.txt
+    else
+        echo $NETWORK$HOST is propably dead.
+    fi
+    let "HOST+=1"
+done
 # created by filip2cz
 # github: https://github.com/filip2cz/network-scan-hosts
